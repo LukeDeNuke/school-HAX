@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>school HAX</title>
+    <style type="text/css">
+        #jsLinuxWindow {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 600px;
+            height: 600px;
+            z-index: 1000;
+        }
+
+        #closeButton {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+        }
+      
+      body{
+        color: white
+      }
+      
+    </style>
+</head>
+<body>
+    <h1>school HAX</h1>
+    <input type="text" id="searchInput" placeholder="Enter your search query">
+    <button onclick="search()">Search</button>
+    <div id="searchResults"></div>
+    <button onclick="addBookmarklet()">Add ego</button>
+    <button id="deployButton">Deploy JSLinux</button>
+
+    <div id="jsLinuxWindow">
+        <button id="closeButton">Close</button>
+        <iframe id="jsLinuxFrame" src="" frameborder="0" scrolling="no" width="100%" height="100%" loading="lazy"></iframe>
+    </div>
+
+    <script>
+        function search() {
+            var query = document.getElementById('searchInput').value;
+            var url = "https://www.bing.com/search?q=" + encodeURIComponent(query);
+            window.open(url, '_blank', 'width=600,height=600');
+        }
+
+        function addBookmarklet() {
+            var bookmarkletCode = "(function() { var scriptElement = document.createElement('script'); var sourceUrl = 'https://cdn.jsdelivr.net/gh/yeahbread/Ego-Menu-Bookmarklets/Menu.js'; fetch(sourceUrl) .then(response => response.text()) .then(sourceCode => { scriptElement.text = sourceCode; document.body.appendChild(scriptElement); }) .catch(error => console.error('Error fetching script:', error));})();";
+            var scriptElement = document.createElement('script');
+            scriptElement.text = bookmarkletCode;
+            document.body.appendChild(scriptElement);
+        }
+
+        document.getElementById('closeButton').addEventListener('click', function() {
+            document.getElementById('jsLinuxWindow').style.display = 'none';
+            document.getElementById('jsLinuxFrame').src = '';
+        });
+
+        document.getElementById('deployButton').addEventListener('click', function() {
+            var url = 'https://bellard.org/jslinux/vm.html?cpu=riscv64&url=fedora33-riscv.cfg&mem=256';
+            window.open(url, '_blank', 'width=600,height=600');
+        });
+    </script>
+</body>
+</html>
